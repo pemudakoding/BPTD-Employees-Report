@@ -12,5 +12,11 @@
         </div>
       </div>
     </div>
+    <div class="col-12 mb-4">
+      <div class="alert alert-warning">
+        <div class="alert-title">Peringatan</div>
+        Kamu belum mengisi laporan harian!, silahkan mengisi laporan harian dihalaman laporan.
+      </div>
+    </div>
   </div>
 @endsection

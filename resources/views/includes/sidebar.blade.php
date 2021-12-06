@@ -16,8 +16,10 @@
           </ul>
         </li> --}}
 
-      <li class="active"><a class="nav-link" href="blank.html"><i class="fas fa-fire"></i>
+      <li><a class="nav-link" href="{{ route('dashboard.index') }}"><i class="fas fa-fire"></i>
           <span>Dashboard</span></a></li>
+      <li><a class="nav-link" href="{{ route('dashboard.report.index') }}"><i class="fas fa-file"></i>
+          <span>Laporan</span></a></li>
     </ul>
   </aside>
 </div>

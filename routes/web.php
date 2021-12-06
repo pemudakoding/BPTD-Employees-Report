@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\{DashboardController, ReportController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +18,21 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-route::middleware(['auth'])
+Route::middleware(['auth'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
-        Route::get('', [DashboardController::class, 'index']);
+        Route::get('', [DashboardController::class, 'index'])
+            ->name('index');
+
+        Route::prefix('report')
+            ->name('report.')
+            ->group(function () {
+                Route::get('', [ReportController::class, 'index'])
+                    ->name('index');
+                Route::get('create', [ReportController::class, 'create'])
+                    ->name('create');
+                Route::get('edit', [ReportController::class, 'edit'])
+                    ->name('edit');
+            });
     });

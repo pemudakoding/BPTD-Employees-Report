@@ -16,6 +16,7 @@
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered table-md">
+              @include('includes.alert')
               <tbody>
                 <tr>
                   <th>#</th>

@@ -15,3 +15,4 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 <script src="{{ asset('js/scripts.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 <!-- Page Specific JS File -->
+@stack('afterScripts')

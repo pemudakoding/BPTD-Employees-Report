@@ -34,5 +34,8 @@ Route::middleware(['auth'])
                     ->name('create');
                 Route::get('edit', [ReportController::class, 'edit'])
                     ->name('edit');
+
+                Route::post('', [ReportController::class, 'store'])
+                    ->name('store');
             });
     });

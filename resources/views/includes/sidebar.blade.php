@@ -18,8 +18,16 @@
 
       <li><a class="nav-link" href="{{ route('dashboard.index') }}"><i class="fas fa-fire"></i>
           <span>Dashboard</span></a></li>
-      <li><a class="nav-link" href="{{ route('dashboard.report.index') }}"><i class="fas fa-file"></i>
-          <span>Laporan</span></a></li>
+      @can('viewAny', App\Models\ActivityReport::class)
+        <li><a class="nav-link" href="{{ route('dashboard.report.index') }}"><i class="fas fa-file"></i>
+            <span>Laporan</span></a></li>
+      @endcan
+      @can('viewAny', App\Models\User::class)
+        <li class="menu-header">Pengaturan</li>
+        <li><a class="nav-link" href="{{ route('dashboard.report.index') }}"><i class="fas fa-users"></i>
+            <span>User</span></a></li>
+      @endcan
+
     </ul>
   </aside>
 </div>

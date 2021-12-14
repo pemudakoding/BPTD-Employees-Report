@@ -21,51 +21,35 @@
                 <tr>
                   <th>#</th>
                   <th>Judul</th>
+                  <th>Deskripsi</th>
                   <th>Status Dinas</th>
                   <th>Action</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Pemasangan Rambu Lalulintas sekitar POSO</td>
-                  <td>
-                    <span class="badge badge-info">Perjalanan Dinas</span>
-                  </td>
-                  <td><a href="{{ route('dashboard.report.edit') }}" class="btn btn-secondary">Edit</a><a href="#"
-                      class=" ml-2 btn btn-danger">Hapus</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Pembuatan Desain Jalur Rambu</td>
-                  <td>
-                    <span class="badge badge-success">Kantor Induk</span>
-                  </td>
-                  <td><a href="{{ route('dashboard.report.edit') }}" class="btn btn-secondary">Edit</a><a href="#"
-                      class=" ml-2 btn btn-danger">Hapus</a>
-                  </td>
-                </tr>
-
+                @foreach ($reports as $report)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $report->title }}</td>
+                    <td>{{ Str::limit(strip_tags($report->description), 100) }}....</td>
+                    <td>
+                      @if ($report->service_status === 'Perjalanan Dinas')
+                        <span class="badge badge-info">
+                        @else
+                          <span class="badge badge-success">
+                      @endif
+                      {{ $report->service_status }}
+                      </span>
+                    </td>
+                    <td><a href="{{ route('dashboard.report.edit') }}" class="btn btn-secondary">Edit</a><a href="#"
+                        class=" ml-2 btn btn-danger">Hapus</a>
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
         </div>
         <div class="card-footer text-right">
-          <nav class="d-inline-block">
-            <ul class="pagination mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1 <span
-                    class="sr-only">(current)</span></a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-              </li>
-            </ul>
-          </nav>
+          {{ $reports->links() }}
         </div>
       </div>
     </div>

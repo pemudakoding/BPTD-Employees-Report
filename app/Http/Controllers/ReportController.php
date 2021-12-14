@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Report\StoreReport;
+use App\Actions\Report\{StoreReport, GetReport};
 use App\Models\ActivityReport;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\{StoreReportRequest};
 
@@ -15,11 +14,12 @@ class ReportController extends Controller
     {
     }
 
-    public function index()
+    public function index(GetReport $report)
     {
         $this->authorize('viewAny', ActivityReport::class);
+        $reports = $report->getAllReport();
 
-        return view('pages.report.index');
+        return view('pages.report.index', compact('reports'));
     }
 
     public function create()

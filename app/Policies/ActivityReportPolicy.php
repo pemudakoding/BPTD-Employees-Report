@@ -63,7 +63,11 @@ class ActivityReportPolicy
      */
     public function update(User $user, ActivityReport $activityReport)
     {
-        //
+
+
+        return $user->id === $activityReport->user_id
+            ?  Response::allow()
+            : Response::deny('Kamu gak punya akses!');
     }
 
     /**

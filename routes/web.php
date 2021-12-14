@@ -3,6 +3,9 @@
 use App\Http\Controllers\{DashboardController, ReportController};
 use Illuminate\Support\Facades\Route;
 
+
+use App\Policies\ActivityReportPolicy;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,17 +28,27 @@ Route::middleware(['auth'])
         Route::get('', [DashboardController::class, 'index'])
             ->name('index');
 
-        Route::prefix('report')
+        Route::middleware([
+            'can:viewAny,App\Models\ActivityReport',
+        ])
+            ->prefix('report')
             ->name('report.')
             ->group(function () {
                 Route::get('', [ReportController::class, 'index'])
                     ->name('index');
-                Route::get('create', [ReportController::class, 'create'])
-                    ->name('create');
-                Route::get('edit', [ReportController::class, 'edit'])
-                    ->name('edit');
 
-                Route::post('', [ReportController::class, 'store'])
-                    ->name('store');
+                Route::middleware(['can:create,App\Models\ActivityReport'])->group(function () {
+                    Route::get('create', [ReportController::class, 'create'])
+                        ->name('create');
+
+                    Route::post('', [ReportController::class, 'store'])
+                        ->name('store');
+                });
+                Route::middleware(['can:update,activityReport'])->group(function () {
+                    Route::get('edit/{activityReport}', [ReportController::class, 'edit'])
+                        ->name('edit');
+                    Route::put('update/{activityReport}', [ReportController::class, 'update'])
+                        ->name('update');
+                });
             });
     });

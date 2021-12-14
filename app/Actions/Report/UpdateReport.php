@@ -2,32 +2,27 @@
 
 namespace App\Actions\Report;
 
-use App\Models\ActivityReport;
-use Illuminate\Support\Facades\Auth;
-
-class StoreReport
+class UpdateReport
 {
-    public function store($requestData)
+    public function update($activityReportObject, $requestData)
     {
 
-        $data = $requestData->all();
-        $data['user_id'] = Auth::user()->id;
+        $updating = $activityReportObject
+            ->update($requestData->all());
 
-        $store = ActivityReport::create($data);
-
-        if ($store)
+        if ($updating)
             return redirect()
                 ->route('dashboard.report.index')
                 ->with('alert', [
                     'type' => 'success',
-                    'msg'  => 'Berhasil menyimpan laporan harian'
+                    'msg'  => 'Berhasil mengubah laporan harian'
                 ]);
         else
             return redirect()
                 ->route('dashboard.report.index')
                 ->with('alert', [
                     'type' => 'danger',
-                    'msg'  => 'Gaga; menyimpan laporan harian'
+                    'msg'  => 'Gaga; mengubah laporan harian'
                 ]);
     }
 }

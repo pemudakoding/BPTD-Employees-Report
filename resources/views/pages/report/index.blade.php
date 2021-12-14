@@ -39,8 +39,8 @@
                       {{ $report->service_status }}
                       </span>
                     </td>
-                    <td><a href="{{ route('dashboard.report.edit') }}" class="btn btn-secondary">Edit</a><a href="#"
-                        class=" ml-2 btn btn-danger">Hapus</a>
+                    <td><a href="{{ route('dashboard.report.edit', $report->id) }}" class="btn btn-secondary">Edit</a><a
+                        href="#" class=" ml-2 btn btn-danger">Hapus</a>
                     </td>
                   </tr>
                 @endforeach

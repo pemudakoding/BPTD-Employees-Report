@@ -39,8 +39,14 @@
                       {{ $report->service_status }}
                       </span>
                     </td>
-                    <td><a href="{{ route('dashboard.report.edit', $report->id) }}" class="btn btn-secondary">Edit</a><a
-                        href="#" class=" ml-2 btn btn-danger">Hapus</a>
+                    <td class="d-flex">
+                      <a href="{{ route('dashboard.report.edit', $report->id) }}" class="btn btn-secondary">Edit</a>
+                      <form action="{{ route('dashboard.report.destroy', $report->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class=" ml-2 btn btn-danger">Hapus</button>
+                      </form>
+
                     </td>
                   </tr>
                 @endforeach

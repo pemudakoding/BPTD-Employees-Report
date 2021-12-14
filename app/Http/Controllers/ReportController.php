@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Report\{StoreReport, GetReport, UpdateReport};
+use App\Actions\Report\{DestroyReport, StoreReport, GetReport, UpdateReport};
 use App\Models\{ActivityReport};
 use Illuminate\Http\Request;
-use App\Http\Requests\{StoreReportRequest, UpdateReportRequest};
+use App\Http\Requests\{DestroyReportRequest, StoreReportRequest, UpdateReportRequest};
 
 class ReportController extends Controller
 {
@@ -40,5 +40,10 @@ class ReportController extends Controller
 
         return $activityReportAction
             ->update($activityReport, $request);
+    }
+
+    public function destroy(ActivityReport $activityReport, DestroyReport $activityReportAction)
+    {
+        return $activityReportAction->destroy($activityReport);
     }
 }

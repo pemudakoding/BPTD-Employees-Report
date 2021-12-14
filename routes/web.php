@@ -25,6 +25,7 @@ Route::middleware(['auth'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
+
         Route::get('', [DashboardController::class, 'index'])
             ->name('index');
 
@@ -34,6 +35,7 @@ Route::middleware(['auth'])
             ->prefix('report')
             ->name('report.')
             ->group(function () {
+
                 Route::get('', [ReportController::class, 'index'])
                     ->name('index');
 
@@ -44,11 +46,16 @@ Route::middleware(['auth'])
                     Route::post('', [ReportController::class, 'store'])
                         ->name('store');
                 });
+
                 Route::middleware(['can:update,activityReport'])->group(function () {
                     Route::get('edit/{activityReport}', [ReportController::class, 'edit'])
                         ->name('edit');
-                    Route::put('update/{activityReport}', [ReportController::class, 'update'])
+                    Route::put('{activityReport}', [ReportController::class, 'update'])
                         ->name('update');
                 });
+
+                Route::delete('{activityReport}', [ReportController::class, 'destroy'])
+                    ->middleware('can:delete,activityReport')
+                    ->name('destroy');
             });
     });
